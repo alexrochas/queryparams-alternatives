@@ -1,0 +1,43 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.13.BUILD-SNAPSHOT'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'br.com.alex.spring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir.absolutePath}/generated-sources/annotations"
+        }
+    }
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-jersey')
+	compile group: 'io.vavr', name: 'vavr', version: '0.9.0'
+	compile group: 'io.vavr', name: 'vavr-match', version: '0.9.0'
+	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
